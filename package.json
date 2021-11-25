@@ -1,0 +1,20 @@
+{
+    "name": "zendesk-ticket-viewer",
+    "version": "1.0.0",
+    "description": "Ticket viewer for Zendesk internship challenge",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server",
+        "server": "nodemon server",
+        "test": "test"
+    },
+    "author": "Madhu Sivapragasam",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "concurrently": "^6.4.0",
+        "nodemon": "^2.0.15"
+    }
+}
