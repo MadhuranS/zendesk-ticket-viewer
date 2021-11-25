@@ -2,7 +2,8 @@ const express = require("express");
 
 const app = express();
 
-app.get("/", (req, res) => res.send("API running"));
+//Define Routes
+app.use("/api/tickets", require("./routes/api/tickets"));
 
 const PORT = process.env.PORT || 5000;
 
