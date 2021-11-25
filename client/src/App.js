@@ -6,12 +6,16 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import "./App.css";
+import Alert from "./layouts/Alert";
 
 const App = () => (
-    <Provider store ={store}>
+    <Provider store={store}>
         <Router>
             <Fragment>
-                <Tickets></Tickets>
+                <div className="container">
+                    <Alert></Alert>
+                    <Tickets></Tickets>
+                </div>
                 <Routes></Routes>
             </Fragment>
         </Router>
