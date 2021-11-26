@@ -18,8 +18,9 @@ router.get("/", async (req, res) => {
     try {
         while (url) {
             const body = await axios.get(url, axiosConfig);
-
-            pages.push(body.data.tickets);
+            if (body.data.tickets && body.data.tickets.length > 0) {
+                pages.push(body.data.tickets);
+            }
             if (body.data["meta"]["has_more"]) {
                 url = body.data["links"]["next"];
             } else {
