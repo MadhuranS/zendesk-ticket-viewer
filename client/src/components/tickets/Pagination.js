@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import { setAlert } from "../../actions/alert";
 import { getTickets } from "../../actions/tickets";
 import Tickets from "./Tickets";
+import Spinner from "../layouts/Spinner";
 
 const Pagination = ({ getTickets, tickets: { pages, loading } }) => {
     useEffect(() => {
@@ -16,7 +17,9 @@ const Pagination = ({ getTickets, tickets: { pages, loading } }) => {
     const handlePageClick = (event) => {
         setCurrentPage(event.selected);
     };
-    return (
+    return loading ? (
+        <Spinner></Spinner>
+    ) : (
         <Fragment>
             <Tickets tickets={pages[currentPage]}></Tickets>
             <ReactPaginate
