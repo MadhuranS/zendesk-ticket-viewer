@@ -1,13 +1,22 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import Card from "react-bootstrap/Card";
 
 const Ticket = ({ ticket }) => {
     return (
-        <Fragment>
-            <div>
-                <h3>Ticket ${ticket.id}</h3>
-            </div>
-        </Fragment>
+            <Card
+                bg="success"
+                text="white"
+                style={{ width: "100%" }}
+                border = "success"
+                className="mb-2"
+            >
+                <Card.Header>Ticket Id: {ticket.id}</Card.Header>
+                <Card.Body>
+                    <Card.Title> {ticket.subject} </Card.Title>
+                    <Card.Text>{ticket.description}</Card.Text>
+                </Card.Body>
+            </Card>
     );
 };
 

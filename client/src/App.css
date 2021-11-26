@@ -78,50 +78,27 @@
     color: #fff;
 }
 
-.pagination {
-  justify-content: center;
+li a {
+  border-radius: 7px;
+  padding: 0.1rem 1rem;
+  border: gray 1px solid;
+  cursor: pointer;
 }
-
-ul {
-  list-style: none;
-  padding: 0;
+li.previous a,
+li.next a,
+li.break a {
+  border-color: transparent;
 }
-
-ul.pagination li {
-  display: inline-block;
-  width: 30px;
-  border: 1px solid #e2e2e2;
-  display: flex;
-  justify-content: center;
-  font-size: 25px;
-}
-
-ul.pagination li a {
-  text-decoration: none;
-  color: #337ab7;
-  font-size: 20px;
-}
-
-ul.pagination li.active a {
+li.active a {
+  background-color: #0366d6;
+  border-color: transparent;
   color: white;
+  min-width: 32px;
 }
-ul.pagination li.active {
-  background-color: #337ab7;
+li.disabled a {
+  color: grey;
 }
-
-ul.pagination li a:hover,
-ul.pagination li a.active {
-  color: blue;
-}
-
-.page-selection {
-  width: 48px;
-  height: 30px;
-  color: #337ab7;
-}
-
-.pagination-wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+li.disable,
+li.disabled a {
+  cursor: default;
 }

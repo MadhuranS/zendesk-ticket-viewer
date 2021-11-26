@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from "./components/layouts/Alert";
 
 const App = () => (
