@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 
     pages = [];
 
-    url = "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=25";
+    url = "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=25&sort=updated_at";
     try {
         while (url) {
             const body = await axios.get(url, axiosConfig);
@@ -29,8 +29,12 @@ router.get("/", async (req, res) => {
         }
     } catch (err) {
         console.log(err.message);
-        res.status(500).send("Server Error");
-        return;
+        if (err.response && err.response.status) {
+            return res.status(err.response.status).send(err.message);
+        } else {
+            return res.status(500).send('Server error')
+        }
+
     }
     res.json(pages);
 });

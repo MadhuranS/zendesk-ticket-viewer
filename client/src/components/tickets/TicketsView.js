@@ -16,13 +16,13 @@ const TicketsView = ({
 
     return loading ? (
         <Spinner></Spinner>
-    ) : (
+    ) : pages.length > 0 ? (
         <Fragment>
             <Paginate></Paginate>
             <Tickets tickets={pages[page] ? pages[page] : undefined}></Tickets>
             <Paginate></Paginate>
         </Fragment>
-    );
+    ) : <Fragment></Fragment>;
 };
 
 TicketsView.propTypes = {

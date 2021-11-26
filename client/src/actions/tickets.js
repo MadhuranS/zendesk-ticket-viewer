@@ -10,7 +10,12 @@ export const getTickets = () => async (dispatch) => {
             type: GET_TICKETS,
             payload: res.data,
         });
-        dispatch(setAlert("Tickets found!", "success"));
+        if (res.data.length === 0) {
+            dispatch(setAlert("No tickets currently exist", "info"));
+        } else {
+            dispatch(setAlert("Tickets found!", "success"));
+        }
+
     } catch (err) {
         dispatch({
             type: TICKETS_ERROR,
@@ -19,6 +24,8 @@ export const getTickets = () => async (dispatch) => {
                 status: err.response.status,
             },
         });
+        console.log("what was the error", err.response)
+        dispatch(setAlert(`Something went wrong :(, error text: ${err.response.statusText}, error code: ${err.response.status}`, "danger"))
     }
 };
 
