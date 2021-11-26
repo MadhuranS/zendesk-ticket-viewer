@@ -10,9 +10,7 @@ export const getTickets = () => async (dispatch) => {
             type: GET_TICKETS,
             payload: res.data,
         });
-        console.log("I was here");
         dispatch(setAlert("Tickets found!", "success"));
-        console.log("I am done here");
     } catch (err) {
         dispatch({
             type: TICKETS_ERROR,

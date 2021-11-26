@@ -1,7 +1,7 @@
 import { GET_TICKETS, TICKETS_ERROR } from "../actions/types";
 
 const initialState = {
-    tickets: {},
+    pages: [],
     loading: false,
     error: {},
 };
@@ -13,13 +13,13 @@ export default function ticketsReducer(state = initialState, action) {
         case GET_TICKETS:
             return {
                 ...state,
-                tickets: payload,
+                pages: payload,
                 loading: false,
             };
         case TICKETS_ERROR:
             return {
                 ...state,
-                tickets: payload,
+                pages: payload,
                 loading: false,
             };
         default:

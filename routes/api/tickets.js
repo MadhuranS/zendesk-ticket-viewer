@@ -11,17 +11,27 @@ router.get("/", async (req, res) => {
             Authorization: `${config.get(`zendeskSecret`)}`,
         },
     };
-    try {
-        const body = await axios.get(
-            "https://zccmadhu.zendesk.com/api/v2/tickets.json",
-            axiosConfig
-        );
 
-        res.json(body.data);
+    pages = [];
+
+    url = "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=25";
+    try {
+        while (url) {
+            const body = await axios.get(url, axiosConfig);
+
+            pages.push(body.data.tickets);
+            if (body.data["meta"]["has_more"]) {
+                url = body.data["links"]["next"];
+            } else {
+                url = null;
+            }
+        }
     } catch (err) {
         console.log(err.message);
         res.status(500).send("Server Error");
+        return;
     }
+    res.json(pages);
 });
 
 module.exports = router;
