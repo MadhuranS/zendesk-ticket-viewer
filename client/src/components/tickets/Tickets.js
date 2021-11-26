@@ -1,28 +1,21 @@
-import React, { Fragment, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { setAlert } from "../../actions/alert";
-import { getTickets } from "../../actions/tickets";
-import Spinner from "../layouts/Spinner";
+import Ticket from "../ticket/Ticket";
 
-const Tickets = ({ setAlert, getTickets, tickets: { tickets, loading } }) => {
-
-
-    useEffect(() => {
-        getTickets();
-    }, [getTickets]);
-    
-    return <div>Hi!</div>;
+const Tickets = ({ tickets }) => {
+    return (
+        <Fragment>
+            {tickets &&
+                tickets.map((ticket) => (
+                    <Ticket ticket = {ticket}>
+                    </Ticket>
+                ))}
+        </Fragment>
+    );
 };
 
 Tickets.propTypes = {
-    setAlert: PropTypes.func.isRequired,
-    getTickets: PropTypes.func.isRequired,
-    tickets: PropTypes.object.isRequired,
+    tickets: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    tickets: state.tickets,
-});
-
-export default connect(mapStateToProps, { setAlert, getTickets })(Tickets);
+export default Tickets;
