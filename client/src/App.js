@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
-import Pagination from "./components/tickets/Pagination";
+import TicketsView from "./components/tickets/TicketsView";
 //imports for Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -15,7 +15,7 @@ const App = () => (
             <Fragment>
                 <div className="container">
                     <Alert></Alert>
-                    <Pagination></Pagination>
+                    <TicketsView></TicketsView>
                 </div>
                 <Routes></Routes>
             </Fragment>
