@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import Ticket from "../ticket/Ticket";
 
 const Tickets = ({ tickets }) => {
@@ -7,15 +6,11 @@ const Tickets = ({ tickets }) => {
         <Fragment>
             {tickets &&
                 tickets.map((ticket) => (
-                    <Ticket ticket = {ticket}>
-                    </Ticket>
+                    <Ticket key={ticket.id} ticket={ticket}></Ticket>
                 ))}
         </Fragment>
     );
 };
 
-Tickets.propTypes = {
-    tickets: PropTypes.array.isRequired,
-};
 
 export default Tickets;

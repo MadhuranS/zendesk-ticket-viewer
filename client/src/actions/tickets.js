@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { GET_TICKETS, TICKETS_ERROR } from "./types";
+import { GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
 
 //Get all tickets
 export const getTickets = () => async (dispatch) => {
@@ -20,4 +20,11 @@ export const getTickets = () => async (dispatch) => {
             },
         });
     }
+};
+
+export const selectPage = (pageNumber) => async (dispatch) => {
+    dispatch({
+        type: SELECT_PAGE,
+        payload: pageNumber,
+    });
 };
