@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
+import { GET_TICKET, GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
 
 //Get all tickets
 export const getTickets = () => async (dispatch) => {
@@ -24,7 +24,6 @@ export const getTickets = () => async (dispatch) => {
                 status: err.response.status,
             },
         });
-        console.log("what was the error", err.response)
         dispatch(setAlert(`Something went wrong :(, error text: ${err.response.statusText}, error code: ${err.response.status}`, "danger"))
     }
 };
@@ -35,3 +34,10 @@ export const selectPage = (pageNumber) => async (dispatch) => {
         payload: pageNumber,
     });
 };
+
+export const getTicket = (ticket) => async (dispatch) => {
+    dispatch({
+        type: GET_TICKET,
+        payload:ticket
+    })
+}
