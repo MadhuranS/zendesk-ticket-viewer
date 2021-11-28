@@ -4,3 +4,4 @@ export const GET_TICKETS = "GET_TICKETS";
 export const GET_TICKET = "GET_TICKET";
 export const TICKETS_ERROR = "TICKETS_ERROR";
 export const SELECT_PAGE = "SELECT_PAGE";
+export const LOAD_TICKETS = "LOAD_TICKETS"

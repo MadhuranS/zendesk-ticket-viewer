@@ -1,10 +1,13 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import {GET_TICKET, GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
+import {LOAD_TICKETS, GET_TICKET, GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
 
 //Get all tickets
 export const getTickets = () => async (dispatch) => {
     try {
+        dispatch({
+            type: LOAD_TICKETS
+        })
         const res = await axios.get("/api/tickets");
         dispatch({
             type: GET_TICKETS,
@@ -40,6 +43,9 @@ export const selectPage = (pageNumber) => async (dispatch) => {
 };
 
 export const getTicket = (id) => async (dispatch) => {
+    dispatch({
+        type: LOAD_TICKETS
+    })
     try {
         const res = await axios.get(`/api/tickets/${id}`);
         console.log("REs.data", res.data)

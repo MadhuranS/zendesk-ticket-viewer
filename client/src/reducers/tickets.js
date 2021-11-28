@@ -1,4 +1,4 @@
-import { GET_TICKET, GET_TICKETS, TICKETS_ERROR, SELECT_PAGE } from "../actions/types";
+import { GET_TICKET, GET_TICKETS, TICKETS_ERROR, SELECT_PAGE, LOAD_TICKETS } from "../actions/types";
 
 const initialState = {
     pages: [],
@@ -12,6 +12,11 @@ export default function ticketsReducer(state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
+        case LOAD_TICKETS:
+            return {
+                ...state,
+                loading: true,
+            }
         case GET_TICKETS:
             return {
                 ...state,
@@ -28,7 +33,10 @@ export default function ticketsReducer(state = initialState, action) {
         case TICKETS_ERROR:
             return {
                 ...state,
-                pages: payload,
+                error: payload,
+                ticket: null,
+                pages: [],
+                page: 0,
                 loading: false,
             };
         case SELECT_PAGE:
