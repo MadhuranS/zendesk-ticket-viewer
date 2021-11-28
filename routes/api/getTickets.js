@@ -1,5 +1,3 @@
-const express = require("express");
-const router = express.Router();
 const config = require("config");
 const axios = require("axios");
 const axiosConfig = {
@@ -8,11 +6,8 @@ const axiosConfig = {
     },
 };
 
-// @route GET api/tickets
-// @desc  Get all tickets from zendesk
-router.get("/", async (req, res) => {
+async function getTickets(req, res) {
     pages = [];
-
     url =
         "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=25&sort=updated_at";
     try {
@@ -28,7 +23,6 @@ router.get("/", async (req, res) => {
             }
         }
     } catch (err) {
-        console.log(err.message);
         if (err.response && err.response.status) {
             return res.status(err.response.status).send(err.message);
         } else {
@@ -36,22 +30,6 @@ router.get("/", async (req, res) => {
         }
     }
     res.json(pages);
-});
+}
 
-router.get("/:id", async (req, res) => {
-    url =
-    `https://zccmadhu.zendesk.com/api/v2/tickets/${req.params.id}`;
-    try {
-        const body = await axios.get(url, axiosConfig)
-        res.json(body.data.ticket)
-    } catch (err) {
-        console.log(err.message);
-        if (err.response && err.response.status) {
-            return res.status(err.response.status).send(err.message)
-        } else {
-            return res.status(500).send("Server error")
-        }
-    }
-});
-
-module.exports = router;
+module.exports = getTickets;
