@@ -5,12 +5,9 @@ import BootstrapAlert from "react-bootstrap/Alert";
 
 const Alert = ({ alerts }) =>
     alerts !== null &&
-    alerts.length > 0 &&
-    alerts.map((alert) => (
-        <BootstrapAlert key={alert.id} variant={`${alert.alertType}`}>
-            {alert.msg}
+        <BootstrapAlert key={alerts.id} variant={`${alerts.alertType}`}>
+            {alerts.msg}
         </BootstrapAlert>
-    ));
 
 Alert.propTypes = {
     alerts: PropTypes.array.isRequired,
