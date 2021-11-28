@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { getTicket } from "../../actions/tickets";
 import Spinner from "../layouts/Spinner";
 
+
 const statusColors = {
     new: "warning",
     open: "danger",
@@ -18,7 +19,6 @@ const statusColors = {
 
 const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
     const { id } = useParams();
-    console.log("id", id);
     useEffect(() => {
         getTicket(id);
     }, [getTicket, id]);
@@ -62,5 +62,10 @@ const mapStateToProps = (state) => ({
     tickets: state.tickets,
     getTicket: PropTypes.func.isRequired,
 });
+
+Ticket.propTypes = {
+    getTicket: PropTypes.func.isRequired,
+    tickets: PropTypes.object.isRequired,
+};
 
 export default connect(mapStateToProps, { getTicket })(Ticket);

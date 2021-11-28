@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import { getTicket } from "../../actions/tickets";
+
 import { Link } from "react-router-dom";
 
 const statusColors = {
@@ -14,7 +14,7 @@ const statusColors = {
     closed: "light",
 };
 
-const Tickets = ({ getTicket, tickets }) => {
+const Tickets = ({ tickets }) => {
     return (
         <Fragment>
             {tickets &&
@@ -45,8 +45,4 @@ const Tickets = ({ getTicket, tickets }) => {
     );
 };
 
-Tickets.propTypes = {
-    getTicket: PropTypes.func.isRequired,
-};
-
-export default connect(null, { getTicket })(Tickets);
+export default Tickets;

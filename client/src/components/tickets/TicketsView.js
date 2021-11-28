@@ -6,15 +6,10 @@ import Tickets from "./Tickets";
 import Spinner from "../layouts/Spinner";
 import Paginate from "./Paginate";
 
-const TicketsView = ({
-    getTickets,
-    tickets: { page, pages, loading },
-}) => {
+const TicketsView = ({ getTickets, tickets: { page, pages, loading } }) => {
     useEffect(() => {
-        if (pages.length === 0) {
-            getTickets();
-        } 
-    }, [getTickets, pages.length]);
+        getTickets();
+    }, [getTickets]);
 
     return loading ? (
         <Spinner></Spinner>
@@ -24,7 +19,9 @@ const TicketsView = ({
             <Tickets tickets={pages[page] ? pages[page] : undefined}></Tickets>
             <Paginate></Paginate>
         </Fragment>
-    ) : <Fragment></Fragment>;
+    ) : (
+        <Fragment></Fragment>
+    );
 };
 
 TicketsView.propTypes = {
@@ -36,6 +33,4 @@ const mapStateToProps = (state) => ({
     tickets: state.tickets,
 });
 
-export default connect(mapStateToProps, { getTickets })(
-    TicketsView
-);
+export default connect(mapStateToProps, { getTickets })(TicketsView);
