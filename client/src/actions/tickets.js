@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { GET_TICKET, GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
+import {GET_TICKET, GET_TICKETS, SELECT_PAGE, TICKETS_ERROR } from "./types";
 
 //Get all tickets
 export const getTickets = () => async (dispatch) => {
@@ -15,7 +15,6 @@ export const getTickets = () => async (dispatch) => {
         } else {
             dispatch(setAlert("Tickets found!", "success"));
         }
-
     } catch (err) {
         dispatch({
             type: TICKETS_ERROR,
@@ -24,7 +23,12 @@ export const getTickets = () => async (dispatch) => {
                 status: err.response.status,
             },
         });
-        dispatch(setAlert(`Something went wrong :(, error text: ${err.response.statusText}, error code: ${err.response.status}`, "danger"))
+        dispatch(
+            setAlert(
+                `Something went wrong :(, error text: ${err.response.statusText}, error code: ${err.response.status}`,
+                "danger"
+            )
+        );
     }
 };
 
@@ -35,9 +39,28 @@ export const selectPage = (pageNumber) => async (dispatch) => {
     });
 };
 
-export const getTicket = (ticket) => async (dispatch) => {
-    dispatch({
-        type: GET_TICKET,
-        payload:ticket
-    })
-}
+export const getTicket = (id) => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/tickets/${id}`);
+        console.log("REs.data", res.data)
+        dispatch({
+            type: GET_TICKET,
+            payload: res.data,
+        });
+        dispatch(setAlert("Ticket found!", "success"));
+    } catch (err) {
+        dispatch({
+            type: TICKETS_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status,
+            },
+        });
+        dispatch(
+            setAlert(
+                `Something went wrong :(, error text: ${err.response.statusText}, error code: ${err.response.status}`,
+                "danger"
+            )
+        );
+    }
+};

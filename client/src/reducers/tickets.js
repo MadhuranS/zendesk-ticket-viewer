@@ -1,4 +1,4 @@
-import { GET_TICKETS, GET_TICKET, TICKETS_ERROR, SELECT_PAGE } from "../actions/types";
+import { GET_TICKET, GET_TICKETS, TICKETS_ERROR, SELECT_PAGE } from "../actions/types";
 
 const initialState = {
     pages: [],

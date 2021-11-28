@@ -1,9 +1,9 @@
-import React, { Fragment} from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { getTicket } from "../../actions/tickets";
+import { Link } from "react-router-dom";
 
 const statusColors = {
     new: "warning",
@@ -15,9 +15,6 @@ const statusColors = {
 };
 
 const Tickets = ({ getTicket, tickets }) => {
-    const handleClick = (ticket) => {
-        getTicket(ticket)
-    };
     return (
         <Fragment>
             {tickets &&
@@ -33,13 +30,13 @@ const Tickets = ({ getTicket, tickets }) => {
                         <Card.Header>Ticket Id: {ticket.id}</Card.Header>
                         <Card.Body>
                             <Card.Title> {ticket.subject} </Card.Title>
-                            <Button
-                                size="sm"
-                                variant="outline-dark"
-                                onClick={() => handleClick(ticket)}
+                            <Link
+                                to={`/ticket/${ticket.id}`}
+                                className="btn btn-primary my-1"
+
                             >
                                 Read more
-                            </Button>
+                            </Link>
                         </Card.Body>
                         <Card.Footer>Status: {ticket.status}</Card.Footer>
                     </Card>
@@ -52,4 +49,4 @@ Tickets.propTypes = {
     getTicket: PropTypes.func.isRequired,
 };
 
-export default connect(null, {getTicket})(Tickets);
+export default connect(null, { getTicket })(Tickets);

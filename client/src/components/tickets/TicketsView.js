@@ -11,8 +11,10 @@ const TicketsView = ({
     tickets: { page, pages, loading },
 }) => {
     useEffect(() => {
-        getTickets();
-    }, [getTickets]);
+        if (pages.length === 0) {
+            getTickets();
+        } 
+    }, [getTickets, pages.length]);
 
     return loading ? (
         <Spinner></Spinner>
