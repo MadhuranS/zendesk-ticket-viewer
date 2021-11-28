@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 //Define Routes
-app.use("/api/tickets", require("./routes/api/tickets"));
+app.use("/api/tickets", require("./routes/routing/tickets"));
 
 const PORT = process.env.PORT || 5000;
 
