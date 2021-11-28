@@ -1,8 +1,5 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-
 import { Link } from "react-router-dom";
 
 const statusColors = {

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import TicketsView from "./components/tickets/TicketsView";
 //imports for Redux
