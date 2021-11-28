@@ -23,6 +23,7 @@ async function getTickets(req, res) {
             }
         }
     } catch (err) {
+        console.log(err.message);;
         if (err.response && err.response.status) {
             return res.status(err.response.status).send(err.message);
         } else {
