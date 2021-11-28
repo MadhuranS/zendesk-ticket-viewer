@@ -7,7 +7,6 @@ const mockResponse = () => {
     res.status = jest.fn().mockReturnValue(res);
     res.json = jest.fn().mockReturnValue(res);
     res.send = jest.fn().mockReturnValue(res);
-
     return res;
 };
 const mockRequest = (sessionData) => {
@@ -25,8 +24,6 @@ class axiosError extends Error {
 }
 
 jest.mock("axios");
-const req = mockRequest({});
-const res = mockResponse();
 
 describe("test endpoint to get all tickets", () => {
     test("returns the singular ticket that exists", async () => {
@@ -42,6 +39,8 @@ describe("test endpoint to get all tickets", () => {
         };
 
         axios.get.mockResolvedValueOnce(testTickets);
+        const req = mockRequest({});
+        const res = mockResponse();
         await getTickets(req, res);
         expect(res.json).toHaveBeenCalledWith([[{ id: 1 }]]);
     });
@@ -74,6 +73,8 @@ describe("test endpoint to get all tickets", () => {
         };
         axios.get.mockResolvedValueOnce(testTickets);
         axios.get.mockResolvedValueOnce(testTickets2);
+        const req = mockRequest({});
+        const res = mockResponse();
         await getTickets(req, res);
         expect(axios.get).toHaveBeenLastCalledWith(`www.test.com`, {
             headers: { Authorization: `${config.get(`zendeskSecret`)}` },
@@ -82,11 +83,15 @@ describe("test endpoint to get all tickets", () => {
     });
     test("handle api response error", async () => {
         axios.get.mockRejectedValueOnce(new axiosError("unauthorized", 401));
+        const req = mockRequest({});
+        const res = mockResponse();
         await getTickets(req, res);
         expect(res.status).toHaveBeenCalledWith(401);
     });
     test("handle internal server error", async () => {
         axios.get.mockRejectedValueOnce(new Error("Server error"));
+        const req = mockRequest({});
+        const res = mockResponse();
         await getTickets(req, res);
         expect(res.status).toHaveBeenCalledWith(500);
     });
