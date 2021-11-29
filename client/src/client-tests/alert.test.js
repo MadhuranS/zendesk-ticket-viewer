@@ -18,7 +18,7 @@ describe("Alert Component", () => {
             component = setUp(props);
         });
         it("Should render an alert component without errors", () => {
-            const wrapper = findByTestAtrr(component, "alert");
+            const wrapper = findByTestAtrr(component, "Alert");
             expect(wrapper.length).toBe(1);
         });
     });
@@ -31,7 +31,7 @@ describe("Alert Component", () => {
             component = setUp(props);
         });
         it("Should not render", () => {
-            const wrapper = findByTestAtrr(component, "alert");
+            const wrapper = findByTestAtrr(component, "Alert");
             expect(wrapper.length).toBe(0);
         });
     });

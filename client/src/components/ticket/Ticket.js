@@ -3,10 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { getTicket } from "../../actions/tickets";
 import Spinner from "../layouts/Spinner";
-
 
 const statusColors = {
     new: "warning",
@@ -17,20 +15,27 @@ const statusColors = {
     closed: "light",
 };
 
-const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
+export const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
     const { id } = useParams();
     useEffect(() => {
         getTicket(id);
     }, [getTicket, id]);
     return loading ? (
-        <Spinner></Spinner>
+        <Spinner data-test="Loading"></Spinner>
     ) : ticket === null ? (
         <Fragment>
-            <Button href="/">Go back to all tickets</Button>
+            <Link
+                data-test="Ticket-Link"
+                className="btn btn-primary my-1"
+                to="/"
+            >
+                Go back to all tickets
+            </Link>
         </Fragment>
     ) : (
         <Fragment>
             <Card
+                data-test="Ticket"
                 key={ticket.id}
                 bg="light"
                 text="dark"
@@ -38,8 +43,10 @@ const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
                 border={statusColors[ticket.status]}
                 className="mb-2 border-2"
             >
-                <Card.Header>Ticket Id: {ticket.id}</Card.Header>
-                <Card.Body>
+                <Card.Header data-test="Ticket-Header">
+                    Ticket Id: {ticket.id}
+                </Card.Header>
+                <Card.Body data-test="Ticket-Body">
                     <Card.Title> {ticket.subject} </Card.Title>
                     <Card.Subtitle>
                         Created at: {ticket.created_at}, Updated at:{" "}
@@ -51,9 +58,17 @@ const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
                         {ticket.submitter_id}
                     </Card.Subtitle>
                 </Card.Body>
-                <Card.Footer>Status: {ticket.status}</Card.Footer>
+                <Card.Footer data-test="Ticket-Footer">
+                    Status: {ticket.status}
+                </Card.Footer>
             </Card>
-            <Link className="btn btn-primary my-1" to="/">Go back to all tickets</Link>
+            <Link
+                data-test="Ticket-Link"
+                className="btn btn-primary my-1"
+                to="/"
+            >
+                Go back to all tickets
+            </Link>
         </Fragment>
     );
 };

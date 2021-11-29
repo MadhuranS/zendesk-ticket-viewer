@@ -17,23 +17,23 @@ describe("Tickets Component", () => {
             };
             component = setUp(props);
         });
-        it("Should render a Ticket component without errors", () => {
+        it("Should render 2 Ticket components without errors", () => {
             const wrapper = findByTestAtrr(component, "Ticket");
             expect(wrapper.length).toBe(2);
         });
-        it("Should render a Ticket header without errors", () => {
+        it("Should render 2 Ticket headers without errors", () => {
             const wrapper = findByTestAtrr(component, "Ticket-Header");
             expect(wrapper.length).toBe(2);
         });
-        it("Should render a Ticket body without errors", () => {
+        it("Should render 2 Ticket bodys without errors", () => {
             const wrapper = findByTestAtrr(component, "Ticket-Body");
             expect(wrapper.length).toBe(2);
         });
-        it("Should render a Ticket link without errors", () => {
+        it("Should render 2 Ticket links without errors", () => {
             const wrapper = findByTestAtrr(component, "Ticket-Link");
             expect(wrapper.length).toBe(2);
         });
-        it("Should render a Ticket footer without errors", () => {
+        it("Should render 2 Ticket footers without errors", () => {
             const wrapper = findByTestAtrr(component, "Ticket-Footer");
             expect(wrapper.length).toBe(2);
         });

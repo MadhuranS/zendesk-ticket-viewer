@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { selectPage } from "../../actions/tickets";
 
-const Pagination = ({
+export const Pagination = ({
     selectPage,
     tickets: { page, pages },
 }) => {
@@ -15,6 +15,7 @@ const Pagination = ({
     return (
         <Fragment>
             <ReactPaginate
+            data-test="Pagination"
                 className="pagination"
                 previousLabel="previous"
                 nextLabel="next"

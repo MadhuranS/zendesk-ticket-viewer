@@ -4,7 +4,7 @@ import BootstrapAlert from "react-bootstrap/Alert";
 
 export const Alert = ({ alerts }) =>
     alerts !== null &&
-        <BootstrapAlert data-test="alert" key={alerts.id} variant={`${alerts.alertType}`}>
+        <BootstrapAlert data-test="Alert" key={alerts.id} variant={`${alerts.alertType}`}>
             {alerts.msg}
         </BootstrapAlert>
 

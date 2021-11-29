@@ -4,20 +4,20 @@ import PropTypes from "prop-types";
 import { getTickets } from "../../actions/tickets";
 import Tickets from "./Tickets";
 import Spinner from "../layouts/Spinner";
-import Paginate from "./Paginate";
+import Pagination from "./Pagination";
 
-const TicketsView = ({ getTickets, tickets: { page, pages, loading } }) => {
+export const TicketsView = ({ getTickets, tickets: { page, pages, loading } }) => {
     useEffect(() => {
         getTickets();
     }, [getTickets]);
 
     return loading ? (
-        <Spinner></Spinner>
+        <Spinner data-test="Loading"></Spinner>
     ) : pages.length > 0 ? (
         <Fragment>
-            <Paginate></Paginate>
-            <Tickets tickets={pages[page] ? pages[page] : undefined}></Tickets>
-            <Paginate></Paginate>
+            <Pagination data-test="Pagination"></Pagination>
+            <Tickets data-test="Tickets" tickets={pages[page] ? pages[page] : undefined}></Tickets>
+            <Pagination data-test="Pagination"></Pagination>
         </Fragment>
     ) : (
         <Fragment></Fragment>
