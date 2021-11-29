@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import BootstrapAlert from "react-bootstrap/Alert";
 
-const Alert = ({ alerts }) =>
+export const Alert = ({ alerts }) =>
     alerts !== null &&
-        <BootstrapAlert key={alerts.id} variant={`${alerts.alertType}`}>
+        <BootstrapAlert data-test="alert" key={alerts.id} variant={`${alerts.alertType}`}>
             {alerts.msg}
         </BootstrapAlert>
 
