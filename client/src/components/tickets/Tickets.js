@@ -13,10 +13,10 @@ const statusColors = {
 
 const Tickets = ({ tickets }) => {
     return (
-        <Fragment>
+        <Fragment >
             {tickets &&
                 tickets.map((ticket) => (
-                    <Card
+                    <Card data-test="Ticket"
                         key={ticket.id}
                         bg="light"
                         text="dark"
@@ -24,18 +24,19 @@ const Tickets = ({ tickets }) => {
                         border={statusColors[ticket.status]}
                         className="mb-2 border-2"
                     >
-                        <Card.Header>Ticket Id: {ticket.id}</Card.Header>
-                        <Card.Body>
+                        <Card.Header data-test="Ticket-Header">Ticket Id: {ticket.id}</Card.Header>
+                        <Card.Body data-test="Ticket-Body">
                             <Card.Title> {ticket.subject} </Card.Title>
                             <Link
                                 to={`/ticket/${ticket.id}`}
                                 className="btn btn-primary my-1"
+                                data-test="Ticket-Link"
 
                             >
                                 Read more
                             </Link>
                         </Card.Body>
-                        <Card.Footer>Status: {ticket.status}</Card.Footer>
+                        <Card.Footer data-test="Ticket-Footer">Status: {ticket.status}</Card.Footer>
                     </Card>
                 ))}
         </Fragment>
