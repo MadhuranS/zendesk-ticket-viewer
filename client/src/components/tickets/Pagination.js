@@ -1,21 +1,17 @@
-import React, { Fragment} from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { selectPage } from "../../actions/tickets";
 
-export const Pagination = ({
-    selectPage,
-    tickets: { page, pages },
-}) => {
-
+export const Pagination = ({ selectPage, tickets: { page, pages } }) => {
     const handlePageClick = (event) => {
         selectPage(event.selected);
     };
     return (
         <Fragment>
             <ReactPaginate
-            data-test="Pagination"
+                data-test="Pagination"
                 className="pagination"
                 previousLabel="previous"
                 nextLabel="next"
@@ -54,6 +50,4 @@ const mapStateToProps = (state) => ({
     tickets: state.tickets,
 });
 
-export default connect(mapStateToProps, { selectPage })(
-    Pagination
-);
+export default connect(mapStateToProps, { selectPage })(Pagination);

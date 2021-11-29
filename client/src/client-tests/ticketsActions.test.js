@@ -17,52 +17,49 @@ describe("fetchPosts action", () => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
                 status: 200,
-                response: expectedState
-            })
+                response: expectedState,
+            });
         });
-        return store.dispatch(getTickets())
-        .then(() => {
+        return store.dispatch(getTickets()).then(() => {
             const newState = store.getState();
             expect(newState.tickets.pages).toBe(expectedState);
-        })
+        });
     });
     test("tickets page state is updated correctly", () => {
-        const expectedState = 1
+        const expectedState = 1;
         const store = testStore();
         store.dispatch(selectPage(1));
         const newState = store.getState();
         expect(newState.tickets.page).toStrictEqual(expectedState);
-    })
+    });
     test("tickets ticket state is updated correctly", () => {
-        const expectedState = {id: 2};
+        const expectedState = { id: 2 };
         const store = testStore();
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
                 status: 200,
-                response: expectedState
-            })
+                response: expectedState,
+            });
         });
-        return store.dispatch(getTicket(expectedState.id))
-        .then(() => {
+        return store.dispatch(getTicket(expectedState.id)).then(() => {
             const newState = store.getState();
             expect(newState.tickets.ticket).toBe(expectedState);
-        })
-    })
+        });
+    });
     test("tickets error state is updated correctly", () => {
-        const expectedState = {msg: undefined, status: 401}
+        const expectedState = { msg: undefined, status: 401 };
         const store = testStore();
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
                 status: 401,
-                response: expectedState
-            })
+                response: expectedState,
+            });
         });
-        return store.dispatch(getTickets())
-        .then(() => {
+        return store.dispatch(getTickets()).then(() => {
             const newState = store.getState();
             expect(newState.tickets.error).toStrictEqual(expectedState);
-        })
-    })
+        });
+    });
 });

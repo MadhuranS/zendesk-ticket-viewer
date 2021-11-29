@@ -69,7 +69,7 @@ describe("Ticket Reducer", () => {
         });
     });
     it("Test for GET_TICKET action", () => {
-        const ticket = {id:2}
+        const ticket = { id: 2 };
         const newState = ticketsReducer(testState, {
             type: GET_TICKET,
             payload: ticket,
