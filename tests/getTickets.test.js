@@ -2,6 +2,7 @@ const getTickets = require("../routes/api/getTickets");
 const axios = require("axios");
 const config = require("config");
 
+//mock response object
 const mockResponse = () => {
     const res = {};
     res.status = jest.fn().mockReturnValue(res);
@@ -9,12 +10,15 @@ const mockResponse = () => {
     res.send = jest.fn().mockReturnValue(res);
     return res;
 };
+
+//mock request object
 const mockRequest = (sessionData) => {
     return {
         session: { data: sessionData },
     };
 };
 
+//axios error object response
 class axiosError extends Error {
     constructor(message, errorCode) {
         super(message);
@@ -23,6 +27,7 @@ class axiosError extends Error {
     }
 }
 
+//mock axios function call
 jest.mock("axios");
 
 describe("test endpoint to get all tickets", () => {

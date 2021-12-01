@@ -1,7 +1,7 @@
 const config = require("config");
 const axios = require("axios");
 
-
+//Requests data for a specific ticket
 async function getTicket(req, res) {
     const axiosConfig = {
         headers: {
@@ -15,9 +15,9 @@ async function getTicket(req, res) {
     } catch (err) {
         console.log(err.message);
         if (err.response && err.response.status) {
-            return res.status(err.response.status).send(err.message);
+            return res.status(err.response.status).send(err.message); //If external error with api request, forward external api error
         } else {
-            return res.status(500).send("Server error");
+            return res.status(500).send("Server error"); //If internal error, send 500 code
         }
     }
 }

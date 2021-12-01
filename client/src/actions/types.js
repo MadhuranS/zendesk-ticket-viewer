@@ -1,3 +1,4 @@
+//define action types for redux
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 export const GET_TICKETS = "GET_TICKETS";

@@ -5,10 +5,14 @@ import ReactPaginate from "react-paginate";
 import { selectPage } from "../../actions/tickets";
 import { itemsPerPage } from "../../settings";
 
+
+//Pagination component that allows users to paginate through tickets
 export const Pagination = ({
     selectPage,
     tickets: { pageCount, itemOffset },
 }) => {
+
+    //on page change, the new offset is set to be at the start of the new page
     const handlePageClick = (event) => {
         const newOffset = event.selected * itemsPerPage;
         selectPage(newOffset);

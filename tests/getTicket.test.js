@@ -1,6 +1,7 @@
 const getTicket = require("../routes/api/getTicket");
 const axios = require("axios");
 
+//mock response object
 const mockResponse = () => {
     const res = {};
     res.status = jest.fn().mockReturnValue(res);
@@ -8,12 +9,15 @@ const mockResponse = () => {
     res.send = jest.fn().mockReturnValue(res);
     return res;
 };
+
+//mock request object
 const mockRequest = (params) => {
     return {
         params,
     };
 };
 
+//axios error object response
 class axiosError extends Error {
     constructor(message, errorCode) {
         super(message);
@@ -22,6 +26,7 @@ class axiosError extends Error {
     }
 }
 
+//mock the axios call
 jest.mock("axios");
 
 describe("test endpoint to get individual ticket", () => {
@@ -48,9 +53,9 @@ describe("test endpoint to get individual ticket", () => {
     });
     test("handle internal server error", async () => {
         axios.get.mockRejectedValueOnce(new Error("Server error"));
-        const req = mockRequest({id: 1});
+        const req = mockRequest({ id: 1 });
         const res = mockResponse();
         await getTicket(req, res);
         expect(res.status).toHaveBeenCalledWith(500);
-    })
+    });
 });

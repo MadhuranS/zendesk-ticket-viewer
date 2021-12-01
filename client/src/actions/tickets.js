@@ -39,13 +39,15 @@ export const getTickets = () => async (dispatch) => {
     }
 };
 
-export const selectPage = (pageNumber) => async (dispatch) => {
+//Select a specific using an array offset
+export const selectPage = (newOffset) => async (dispatch) => {
     dispatch({
         type: SELECT_PAGE,
-        payload: pageNumber,
+        payload: newOffset,
     });
 };
 
+//Get a specific ticket using ticket id
 export const getTicket = (id) => async (dispatch) => {
     dispatch({
         type: REMOVE_ALERT

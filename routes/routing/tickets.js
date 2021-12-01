@@ -8,7 +8,7 @@ const getTicket = require("../api/getTicket");
 router.get("/", getTickets);
 
 // @route GET api/ticket
-// @desc  Get a ticket using ticket ID
+// @desc  Get a ticket using ticket ID from zendesk
 router.get("/:id", getTicket);
 
 module.exports = router;

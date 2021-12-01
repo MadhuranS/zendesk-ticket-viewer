@@ -11,6 +11,7 @@ const statusColors = {
     closed: "light",
 };
 
+//component that displays all tickets passed into it using bootstrap card component
 const Tickets = ({ tickets }) => {
     return (
         <Fragment>

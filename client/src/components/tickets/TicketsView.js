@@ -7,14 +7,17 @@ import Spinner from "../layouts/Spinner";
 import Pagination from "./Pagination";
 import { itemsPerPage } from "../../settings";
 
+//wrapper component that renders all tickets and pagination tool, 
 export const TicketsView = ({
     getTickets,
     tickets: { itemOffset, allTickets, loading, pageCount },
 }) => {
     useEffect(() => {
-        getTickets();
+        getTickets(); //fetch all tickets everytime the page reloads
     }, [getTickets]);
 
+    //display loading sign when loading or nothing if no tickets exist
+    //Render all tickets that fall within the offset and the number of tickets per page
     return loading ? (
         <Spinner data-test="Loading"></Spinner>
     ) : pageCount > 0 ? (

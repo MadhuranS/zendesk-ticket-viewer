@@ -15,9 +15,11 @@ const statusColors = {
     closed: "light",
 };
 
+//single view ticket component with button to go back to all tickets
 export const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
     const { id } = useParams();
-    useEffect(() => {
+    //on render, ticket is fetched
+    useEffect(() => { 
         getTicket(id);
     }, [getTicket, id]);
     return loading ? (

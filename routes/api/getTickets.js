@@ -1,6 +1,7 @@
 const config = require("config");
 const axios = require("axios");
 
+//Requests all tickets in groups of 100 and keeps looping untill all tickets are requested
 async function getTickets(req, res) {
     tickets = [];
     const axiosConfig = {
@@ -8,8 +9,9 @@ async function getTickets(req, res) {
             Authorization: `${config.get(`token`)}`,
         },
     };
-    url =
-        `https://${config.get(`subdomain`)}/api/v2/tickets.json?page[size]=100&sort=id`;
+    url = `https://${config.get(
+        `subdomain`
+    )}/api/v2/tickets.json?page[size]=100&sort=id`;
     try {
         while (url) {
             const body = await axios.get(url, axiosConfig);
@@ -25,8 +27,10 @@ async function getTickets(req, res) {
     } catch (err) {
         console.log(err.message);
         if (err.response && err.response.status) {
+            //If external error with api request, forward external api error
             return res.status(err.response.status).send(err.message);
         } else {
+            //If internal error, send 500 code
             return res.status(500).send("Server error");
         }
     }
