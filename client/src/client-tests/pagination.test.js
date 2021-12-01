@@ -26,7 +26,7 @@ describe("Pagination component", () => {
         beforeEach(() => {
             mockFunc = jest.fn();
             const props = {
-                tickets: { page: 2, pages: [1, 2] },
+                tickets: { pageCount: 2, itemOffset: 1 },
                 selectPage: mockFunc,
             };
             component = setUp(props);

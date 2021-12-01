@@ -16,6 +16,7 @@ export const getTickets = () => async (dispatch) => {
             type: GET_TICKETS,
             payload: res.data,
         });
+        
         if (res.data.length === 0) {
             dispatch(setAlert("No tickets currently exist", "info"));
         } else {
