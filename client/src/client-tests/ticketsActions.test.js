@@ -2,7 +2,7 @@ import moxios from "moxios";
 import { testStore } from "./utils";
 import { getTickets, selectPage, getTicket } from "../actions/tickets";
 
-describe("fetchPosts action", () => {
+describe("getTickets action", () => {
     beforeEach(() => {
         moxios.install();
     });
@@ -11,7 +11,7 @@ describe("fetchPosts action", () => {
         moxios.uninstall();
     });
     test("tickets state is updated correctly", () => {
-        const expectedState = [[{ id: 1 }, { id: 2 }]];
+        const expectedState = [{ id: 1 }, { id: 2 }];
         const store = testStore();
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
@@ -22,15 +22,15 @@ describe("fetchPosts action", () => {
         });
         return store.dispatch(getTickets()).then(() => {
             const newState = store.getState();
-            expect(newState.tickets.pages).toBe(expectedState);
+            expect(newState.tickets.allTickets).toBe(expectedState);
         });
     });
     test("tickets page state is updated correctly", () => {
-        const expectedState = 1;
+        const expectedState = 25;
         const store = testStore();
-        store.dispatch(selectPage(1));
+        store.dispatch(selectPage(expectedState));
         const newState = store.getState();
-        expect(newState.tickets.page).toStrictEqual(expectedState);
+        expect(newState.tickets.itemOffset).toStrictEqual(expectedState);
     });
     test("tickets ticket state is updated correctly", () => {
         const expectedState = { id: 2 };

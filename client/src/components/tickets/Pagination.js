@@ -3,10 +3,15 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { selectPage } from "../../actions/tickets";
+import { itemsPerPage } from "../../settings";
 
-export const Pagination = ({ selectPage, tickets: { page, pages } }) => {
+export const Pagination = ({
+    selectPage,
+    tickets: { pageCount, itemOffset },
+}) => {
     const handlePageClick = (event) => {
-        selectPage(event.selected);
+        const newOffset = event.selected * itemsPerPage;
+        selectPage(newOffset);
     };
     return (
         <Fragment>
@@ -18,7 +23,7 @@ export const Pagination = ({ selectPage, tickets: { page, pages } }) => {
                 breakLabel="..."
                 breakClassName="page-item"
                 breakLinkClassName="page-link"
-                pageCount={pages.length}
+                pageCount={pageCount}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 onPageChange={handlePageClick}
@@ -35,7 +40,7 @@ export const Pagination = ({ selectPage, tickets: { page, pages } }) => {
                     page >= 1 && page <= pageCount ? `/page/${page}` : "#"
                 }
                 hrefAllControls
-                forcePage={page}
+                forcePage={Math.round(itemOffset / itemsPerPage)}
             ></ReactPaginate>
         </Fragment>
     );

@@ -1,8 +1,10 @@
 import { GET_TICKET, GET_TICKETS, TICKETS_ERROR, SELECT_PAGE, LOAD_TICKETS } from "../actions/types";
+import { itemsPerPage } from "../settings";
 
 const initialState = {
-    pages: [],
-    page: 0,
+    allTickets: [],
+    pageCount: 0,
+    itemOffset: 0,
     ticket: null,
     loading: true,
     error: {},
@@ -20,8 +22,9 @@ export default function ticketsReducer(state = initialState, action) {
         case GET_TICKETS:
             return {
                 ...state,
-                pages: payload,
-                page: 0,
+                allTickets: payload,
+                pageCount: Math.ceil(payload.length / itemsPerPage),
+                itemOffset: 0,
                 loading: false,
             };
         case GET_TICKET:
@@ -35,14 +38,15 @@ export default function ticketsReducer(state = initialState, action) {
                 ...state,
                 error: payload,
                 ticket: null,
-                pages: [],
-                page: 0,
+                allTickets: [],
+                itemOffset: 0,
+                pageCount: 0,
                 loading: false,
             };
         case SELECT_PAGE:
             return {
                 ...state,
-                page: payload,
+                itemOffset: payload,
             }
         default:
             return state;
