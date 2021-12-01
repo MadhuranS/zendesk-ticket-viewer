@@ -26,7 +26,7 @@ describe("Tickets-View component", () => {
         beforeEach(() => {
             mockFunc = jest.fn();
             const props = {
-                tickets: { page: 2, pages: [1, 2], loading: false },
+                tickets: { itemOffset: 0, allTickets: [1, 2], pageCount: 1, loading: false },
                 getTickets: mockFunc,
             };
             component = setUp(props);
@@ -48,7 +48,7 @@ describe("Tickets-View component", () => {
         beforeEach(() => {
             mockFunc = jest.fn();
             const props = {
-                tickets: { page: 2, pages: [1, 2], loading: true },
+                tickets: { itemOffset: 0, allTickets: [1, 2], pageCount: 1, loading: true },
                 getTickets: mockFunc,
             };
             component = setUp(props);
@@ -64,7 +64,7 @@ describe("Tickets-View component", () => {
         beforeEach(() => {
             mockFunc = jest.fn();
             const props = {
-                tickets: { page: 0, pages: [], loading: false },
+                tickets: { itemOffset: 0, allTickets: [], pageCount: 0, loading: false },
                 getTickets: mockFunc,
             };
             component = setUp(props);
