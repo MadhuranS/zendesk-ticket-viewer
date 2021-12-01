@@ -44,7 +44,7 @@ describe("test endpoint to get all tickets", () => {
         await getTickets(req, res);
         expect(res.json).toHaveBeenCalledWith([{ id: 1 }]);
     });
-    test("paginate through and return multiple pages", async () => {
+    test("paginate through and return multiple tickets", async () => {
         const testTickets = {
             data: {
                 tickets: [
