@@ -1,5 +1,5 @@
 {
-    "name": "zendesk-ticket-viewer",
+    "name": "zendesk-ticket-viewer-app",
     "version": "1.0.0",
     "description": "Ticket viewer for Zendesk internship challenge",
     "main": "server.js",
