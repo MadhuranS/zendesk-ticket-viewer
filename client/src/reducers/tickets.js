@@ -16,7 +16,6 @@ const initialState = {
     error: {},
 };
 
-
 //Tickets reducer which modifies state for all tickets, number of pages, item offset to determine current page, current ticket, loading status, and any errors
 export default function ticketsReducer(state = initialState, action) {
     const { type, payload } = action;

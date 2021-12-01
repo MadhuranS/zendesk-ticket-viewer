@@ -8,7 +8,7 @@ export default function alertReducer(state = initialState, action) {
 
     switch (type) {
         case SET_ALERT:
-            return payload
+            return payload;
         case REMOVE_ALERT:
             return null;
         default:
