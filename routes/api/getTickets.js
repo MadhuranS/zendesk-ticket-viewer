@@ -1,15 +1,15 @@
 const config = require("config");
 const axios = require("axios");
-const axiosConfig = {
-    headers: {
-        Authorization: `${config.get(`zendeskSecret`)}`,
-    },
-};
 
 async function getTickets(req, res) {
     tickets = [];
+    const axiosConfig = {
+        headers: {
+            Authorization: `${config.get(`token`)}`,
+        },
+    };
     url =
-        "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=100&sort=id";
+        `https://${config.get(`subdomain`)}/api/v2/tickets.json?page[size]=100&sort=id`;
     try {
         while (url) {
             const body = await axios.get(url, axiosConfig);

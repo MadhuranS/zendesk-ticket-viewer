@@ -77,7 +77,7 @@ describe("test endpoint to get all tickets", () => {
         const res = mockResponse();
         await getTickets(req, res);
         expect(axios.get).toHaveBeenLastCalledWith(`www.test.com`, {
-            headers: { Authorization: `${config.get(`zendeskSecret`)}` },
+            headers: { Authorization: `${config.get(`token`)}` },
         });
         expect(res.json).toHaveBeenCalledWith([{ id: 1 }, { id: 2 }]);
     });
