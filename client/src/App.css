@@ -64,3 +64,8 @@ li.disabled a {
     background: var(--primary-color);
     color: #fff;
 }
+
+.tag {
+    list-style-type: none;
+    display: inline;
+}

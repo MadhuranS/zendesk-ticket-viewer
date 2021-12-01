@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const statusColors = {
     new: "warning",
-    open: "danger",
+    open: "info",
     pending: "primary",
     hold: "dark",
     solved: "success",

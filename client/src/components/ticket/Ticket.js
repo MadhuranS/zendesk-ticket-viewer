@@ -8,7 +8,7 @@ import Spinner from "../layouts/Spinner";
 
 const statusColors = {
     new: "warning",
-    open: "danger",
+    open: "info",
     pending: "primary",
     hold: "dark",
     solved: "success",
@@ -19,7 +19,7 @@ const statusColors = {
 export const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
     const { id } = useParams();
     //on render, ticket is fetched
-    useEffect(() => { 
+    useEffect(() => {
         getTicket(id);
     }, [getTicket, id]);
     return loading ? (
@@ -48,18 +48,19 @@ export const Ticket = ({ getTicket, tickets: { ticket, loading } }) => {
                 <Card.Header data-test="Ticket-Header">
                     Ticket Id: {ticket.id}
                 </Card.Header>
+                <Card.Header>Created at: {ticket.created_at}</Card.Header>
+                <Card.Header>Lasted updated: {ticket.updated_at}</Card.Header>
                 <Card.Body data-test="Ticket-Body">
                     <Card.Title> {ticket.subject} </Card.Title>
                     <Card.Subtitle>
-                        Created at: {ticket.created_at}, Updated at:{" "}
-                        {ticket.updated_at}
+                        Tags:{" "}
+                        {ticket.tags && ticket.tags.map((tag) => (
+                            <li className="tag">{tag}, </li>
+                        ))}
                     </Card.Subtitle>
                     <Card.Text>{ticket.description}</Card.Text>
-                    <Card.Subtitle>
-                        Requested by: {ticket.requester_id}, Submitted by:{" "}
-                        {ticket.submitter_id}
-                    </Card.Subtitle>
                 </Card.Body>
+                <Card.Footer>Requested by: {ticket.requester_id}</Card.Footer>
                 <Card.Footer data-test="Ticket-Footer">
                     Status: {ticket.status}
                 </Card.Footer>
