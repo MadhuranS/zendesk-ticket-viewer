@@ -7,14 +7,14 @@ const axiosConfig = {
 };
 
 async function getTickets(req, res) {
-    pages = [];
+    tickets = [];
     url =
-        "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=25&sort=updated_at";
+        "https://zccmadhu.zendesk.com/api/v2/tickets.json?page[size]=100&sort=id";
     try {
         while (url) {
             const body = await axios.get(url, axiosConfig);
             if (body.data.tickets && body.data.tickets.length > 0) {
-                pages.push(body.data.tickets);
+                tickets = tickets.concat(body.data.tickets);
             }
             if (body.data["meta"]["has_more"]) {
                 url = body.data["links"]["next"];
@@ -30,7 +30,7 @@ async function getTickets(req, res) {
             return res.status(500).send("Server error");
         }
     }
-    res.json(pages);
+    res.json(tickets);
 }
 
 module.exports = getTickets;
