@@ -1,7 +1,7 @@
 # zendesk-ticket-viewer
 
 ### Assumptions:
-  1. I  assumed that all tickets should be requested right on launch rather than lazily requesting tickets as we paginate through the app. Basically I implemented pagination from the frontend rather than the backend. I did this primarily to satisfy the project requirement of "request all the tickets from your account". There also other benefits of requesting all tickets right away such as being able to rapidly swap pages between tickets since all tickets exist on the frontend as well as reduce discrepancies that might arise due to tickets being deleted or created on the server which might cause issues with cursor based pagination. An alternative design would be to use cursor based pagination to only fetch 25 tickets and then save the `next` property request url in the brower state so that I can fetch results for the next page easily.
+  1. I  assumed that all tickets should be requested right on launch rather than lazily requesting tickets as we paginate through the app. Basically I implemented pagination from the frontend rather than the backend. I did this primarily to satisfy the project requirement of "request all the tickets from your account". There also other benefits of requesting all tickets right away such as being able to rapidly swap pages between tickets since all tickets exist on the frontend as well as reduce discrepancies that might arise due to tickets being deleted or created on the server which might cause issues with cursor based pagination. The disadvantage is that for large volumes of tickets, fetching all tickets can become expensive. In the case where the project requirements were different, an alternative design would be to use cursor based pagination to only fetch 25 tickets and then save the `next` property request url in the brower state so that I can fetch results for the next page easily.
 
   2. I also assumed that we are allowed to use any external dependency to complete the project. The key dependencies that I used are React, Redux, Express, Jest, Axios and Bootstrap. I chose to use external dependencies since I felt that they would make my project more readable and easier to work with and also provide scalability in case changes or improvements are needed in the future
   
@@ -18,9 +18,8 @@
       "subdomain": "zccsubdomain.zendesk.com" //Your zendesk subdomain
    }
    ```
-  9. Run `npm run test` to run backend and then frontend unit tests, use `npm run test:client` to run exclusively frontend tests and use `npm run test:server` to run exclusively backend tests
+  9. Run `npm run test` in the project root to run backend and then frontend unit tests, or use `npm run test:client` to run exclusively frontend tests and use `npm run test:server` to run exclusively backend tests
   10. In the project root, run `npm run dev` to run the project. The api server is on port 5000 and the client is on port 3000. Please ensure both ports are free to be used. 
-  11. Use the app however you wish!
   
  ### Usage instructions
   - The main page renders a list of all tickets, you can paginate through the tickets using the paginate tool at the top and bottom of the page. 
@@ -29,6 +28,7 @@
   - Refresh the page to refetch all tickets
 
 ### Design choices
-1. Fetch all tickets by using a loop in the request to continue fetching tickets from zendesk api until all tickets are fetched (see assumption 1 for reasoning)
+1. Fetch all tickets by using a loop in the request to continue fetching tickets from zendesk api until all tickets are fetched (see assumption 1 for reasoning). To add on to this, I use a while loop to keep requesting tickets in the case where more than 100 tickets exist to be fetched since the fetch call only returns 100 tickets. Although fetching all tickets from the server isnt a recommended approach for scaleability, I wanted to comply with the assignment requirements so I choice to design the system in that way. 
 2. I chose to use redux to manage state. For an application of this size, normally redux would not be needed at all. However I made this design choice with the intention of making the app scalable. If we were to add more complicated states or data to the app, having redux to manage state would play an important role in keeping the code organized and make it easy to add other components and features. Also redux provides internal performance benefits and makes code easier to debug and test so from a developer point of view it made sense implement redux. 
 3. Make a single ticket request to display individual ticket details rather than using the ticket state stored locally. This made sense from a best practices point of view since it reduces the amount of data handling complexity we must implement on the frontend. Since user technology can vary, I wanted to avoid complex client side logic. Instead I used the zendesk API to fetch individual ticket details to display. This individual request would be inexpensive and could be easily handled server side which is why I chose to implement them. 
+4. For my UI, in multi ticket view I display key info like Ticket subject, id and status as well as a border colour that represents the status (new = yellow, open = blue, solved = green etc.) In single ticket view I included all this info as well as created and last updated time, ticket tags, ticket description and requester id. I felt that this way multi ticket view would be great for scrolling through tickets while single ticket view provided all nessecary information. 
