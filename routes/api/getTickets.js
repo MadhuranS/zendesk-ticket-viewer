@@ -3,16 +3,17 @@ const axios = require("axios");
 
 //Requests all tickets in groups of 100 and keeps looping untill all tickets are requested
 async function getTickets(req, res) {
-    tickets = [];
-    const axiosConfig = {
-        headers: {
-            Authorization: `${config.get(`token`)}`,
-        },
-    };
-    url = `https://${config.get(
-        `subdomain`
-    )}/api/v2/tickets.json?page[size]=100&sort=id`;
+
     try {
+        tickets = [];
+        const axiosConfig = {
+            headers: {
+                Authorization: `${config.get(`token`)}`,
+            },
+        };
+        url = `https://${config.get(
+            `subdomain`
+        )}/api/v2/tickets.json?page[size]=100&sort=id`;
         while (url) {
             const body = await axios.get(url, axiosConfig);
             if (body.data.tickets && body.data.tickets.length > 0) {

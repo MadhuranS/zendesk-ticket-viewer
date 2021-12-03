@@ -3,13 +3,14 @@ const axios = require("axios");
 
 //Requests data for a specific ticket
 async function getTicket(req, res) {
-    const axiosConfig = {
-        headers: {
-            Authorization: `${config.get(`token`)}`,
-        },
-    };
-    url = `https://${config.get(`subdomain`)}/api/v2/tickets/${req.params.id}`;
+
     try {
+        const axiosConfig = {
+            headers: {
+                Authorization: `${config.get(`token`)}`,
+            },
+        };
+        url = `https://${config.get(`subdomain`)}/api/v2/tickets/${req.params.id}`;
         const body = await axios.get(url, axiosConfig);
         res.json(body.data.ticket);
     } catch (err) {
